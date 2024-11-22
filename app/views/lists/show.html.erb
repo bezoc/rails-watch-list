@@ -1,4 +1,16 @@
 <div class="container mt-5">
+  <!-- Banner -->
+  <div class="banner mb-5">
+    <% if @list.photo.attached? %>
+      <div class="banner-image" style="background-image: url('<%= cl_image_path @list.photo.key, crop: :fill, width: 1200, height: 400 %>');">
+        <div class="container text-center text-white py-5">
+          <h1><%= @list.name %></h1>
+          <p><%= pluralize(@list.bookmarks.count, "movie") %> in this list</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <!-- Title and Badge -->
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1><%= @list.name %></h1>
@@ -62,5 +74,4 @@
     <%= f.input :rating, as: :number, label: "Rating (1 to 5)", input_html: { min: 1, max: 5, step: 1, class: "form-control" } %>
     <%= f.button :submit, "Add Review", class: "btn btn-primary mt-2" %>
   <% end %>
-
-
+</div>
