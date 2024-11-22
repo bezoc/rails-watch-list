@@ -1,22 +1,11 @@
 Rails.application.routes.draw do
-  get 'bookmarks/new'
-  get 'bookmarks/create'
-  get 'bookmarks/destroy'
-  get 'lists/index'
-  get 'lists/show'
-  get 'lists/new'
-  get 'lists/create'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
   root to: 'lists#index'
 
   resources :lists, only: %i[index show new create destroy] do
-    resources :bookmarks, only: %i[new create]
+    resources :bookmarks, only: %i[new create destroy]
+    resources :reviews, only: %i[create]
   end
-  resources :bookmarks, only: :destroy
+  resources :reviews, only: %i[destroy]
 
+  get "up" => "rails/health#show", as: :rails_health_check
 end

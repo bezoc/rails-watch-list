@@ -10,3 +10,126 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+.flash {
+  padding: 16px 24px; /* Espaçamento interno */
+  display: flex; /* Exibe os elementos como uma linha flexível */
+  justify-content: space-between; /* Distribui o texto e o botão de fechar */
+  align-items: center; /* Alinha verticalmente os itens */
+  background: white; /* Fundo branco */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  border-radius: 4px; /* Bordas arredondadas */
+  margin: 8px; /* Espaçamento entre alertas */
+  font-size: 16px; /* Tamanho da fonte */
+}
+
+.flash-success {
+  border: 2px solid #1EDD88; /* Borda verde para sucesso */
+}
+
+
+.flash-danger {
+  border: 2px solid #FD1015; /* Borda vermelha para erros */
+}
+
+.flash span {
+  display: flex; /* Flexbox interno para alinhar o ícone e o texto */
+  align-items: center;
+  gap: 10px; /* Espaçamento entre o ícone e o texto */
+}
+
+.flash a {
+  margin-left: 16px;
+  text-decoration: none; /* Remove o sublinhado do link */
+  font-size: 20px; /* Tamanho do ícone de fechar */
+  color: #000; /* Cor preta para o botão */
+  cursor: pointer; /* Troca o cursor para indicar clicável */
+}
+
+.flash a:hover {
+  color: #555; /* Cor mais escura ao passar o mouse */
+}
+
+.flash-success span {
+  color: #1EDD88; /* Texto verde para sucesso */
+}
+
+.flash-danger span {
+  color: #FD1015; /* Texto vermelho para erros */
+}
+
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding: 150px 0;
+
+  h1 {
+    margin: 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 20px;
+    color: white;
+    opacity: .7;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+}
+
+.card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.btn-outline-danger {
+  font-size: 0.8rem;
+}
+
+.reviews {
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+  padding-top: 20px;
+
+  .review {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+
+    .btn {
+      font-size: 0.8rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+form {
+  margin-top: 20px;
+}
+
+textarea, select, input {
+  border-radius: 8px;
+  padding: 10px;
+}

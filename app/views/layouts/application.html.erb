@@ -11,8 +11,36 @@
   </head>
 
   <body>
+   <div class="banner">
+      <%= image_tag(content_for?(:banner_image) ? yield(:banner_image) : '', class: 'banner-image') %>
+      <div class="container">
+        <h1><%= content_for?(:banner_title) ? yield(:banner_title) : "" %></h1>
+        <p><%= content_for?(:banner_subtitle) ? yield(:banner_subtitle) : "" %></p>
+      </div>
+    </div>
+    
     <div class="container">
-      <%= yield %>
+    <%= yield %>
+    </div>
+
+    <div class="container">
+      <% if flash[:notice] %>
+        <div class="flash flash-success alert alert-dismissible fade show" role="alert">
+          <span><strong>Yay!</strong> 🎉 <%= flash[:notice] %></span>
+          <a data-bs-dismiss="alert" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </a>
+        </div>
+      <% end %>
+
+      <% if flash[:alert] %>
+        <div class="flash flash-danger alert alert-dismissible fade show" role="alert">
+          <span><strong>Oops!</strong> 😱 <%= flash[:alert] %></span>
+          <a data-bs-dismiss="alert" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </a>
+        </div>
+      <% end %>
     </div>
   </body>
 </html>

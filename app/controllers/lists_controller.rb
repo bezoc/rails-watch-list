@@ -5,6 +5,8 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+    @reviews = @list.reviews 
+    @review = Review.new
   end
 
   def new
@@ -21,7 +23,7 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @list = List.find(params[:id]) 
+    @list = List.find(params[:id])
     @list.destroy
     redirect_to lists_path, notice: "List deleted successfully!"
   end
