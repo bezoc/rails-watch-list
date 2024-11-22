@@ -7,10 +7,15 @@
     <div class="col-md-4">
       <div class="card mb-4">
         <% if list.photo.attached? %>
-          <%= cl_image_tag list.photo.key, class: "card-img-top", height: 200, crop: :fill %>
+          <div class="banner mb-5">
+            <div class="banner-image" style="background-image: url('<%= cl_image_path(list.photo.key, crop: :fill, width: 1200, height: 400) %>');"></div>
+          </div>
         <% else %>
-          <%= image_tag "placeholder.png", class: "card-img-top" %>
+          <div class="banner mb-5">
+            <div class="banner-image" style="background-image: url('<%= image_path('default-banner.jpg') %>');"></div>
+          </div>
         <% end %>
+
         <div class="card-body">
           <h5 class="card-title"><%= link_to list.name, list_path(list) %></h5>
           <%= link_to "Delete", list_path(list), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" %>
@@ -19,4 +24,3 @@
     </div>
   <% end %>
 </div>
-

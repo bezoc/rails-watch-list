@@ -15,10 +15,19 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
+
     if @list.save
-      redirect_to list_path(@list)
+      respond_to do |format|
+        format.html { redirect_to @list, notice: 'List was successfully created.' }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append('lists', partial: 'lists/list', locals: { list: @list })
+        end
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -29,6 +38,7 @@ class ListsController < ApplicationController
   end
 
   def update
+    @list = List.find(params[:id])
     if @list.update(list_params)
       redirect_to list_path(@list), notice: 'List was successfully updated.'
     else

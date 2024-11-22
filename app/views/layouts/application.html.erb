@@ -11,16 +11,8 @@
   </head>
 
   <body>
-   <div class="banner">
-      <%= image_tag(content_for?(:banner_image) ? yield(:banner_image) : '', class: 'banner-image') %>
-      <div class="container">
-        <h1><%= content_for?(:banner_title) ? yield(:banner_title) : "" %></h1>
-        <p><%= content_for?(:banner_subtitle) ? yield(:banner_subtitle) : "" %></p>
-      </div>
-    </div>
-    
     <div class="container">
-    <%= yield %>
+      <%= yield %>
     </div>
 
     <div class="container">

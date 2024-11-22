@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <!-- Banner -->
   <div class="banner mb-5">
-    <% if @list.photo.attached? %>
+    <% if @list&.photo&.attached? %>
       <div class="banner-image" style="background-image: url('<%= cl_image_path @list.photo.key, crop: :fill, width: 1200, height: 400 %>');">
         <div class="container text-center text-white py-5">
           <h1><%= @list.name %></h1>
@@ -19,26 +19,30 @@
     </span>
   </div>
 
+  
   <!-- Movie cards -->
+  <h3 class="mt-5">Movies in this List</h3>
   <div class="row">
     <% @list.bookmarks.each do |bookmark| %>
-      <div class="card shadow-sm mb-3">
-        <%= image_tag bookmark.movie.poster_url, alt: bookmark.movie.title, class: "card-img-top img-fluid" %>
-        <div class="card-body">
-          <h5 class="card-title d-flex justify-content-between align-items-center">
-            <span><%= bookmark.movie.title %></span>
-            <span><%= bookmark.movie.rating %> ★</span>
-          </h5>
-          <p class="card-text"><%= bookmark.comment %></p>
-          <%= link_to "Remove", list_bookmark_path(@list, bookmark),
-                        class: "btn btn-outline-danger btn-sm",
-                        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      <div class="col-md-4"> <!-- Ajuste para 3 colunas por linha -->
+        <div class="card shadow-sm mb-4">
+          <%= image_tag bookmark.movie.poster_url, alt: bookmark.movie.title, class: "card-img-top img-fluid" %>
+          <div class="card-body">
+            <h5 class="card-title d-flex justify-content-between align-items-center">
+              <span><%= bookmark.movie.title %></span>
+              <span class="text-warning"><%= number_with_precision(bookmark.movie.rating, precision: 1) %> ★</span>
+            </h5>
+            <p class="card-text"><%= bookmark.comment %></p>
+            <%= link_to "Remove", list_bookmark_path(@list, bookmark),
+                          class: "btn btn-outline-danger btn-sm",
+                          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          </div>
         </div>
       </div>
     <% end %>
   </div>
 
-  <!-- New Bookmark review -->
+  <!-- Add Movie Form -->
   <h3>Add a Movie to this List</h3>
   <%= form_with model: [@list, @list.bookmarks.new], local: true do |f| %>
     <div class="mb-3">
@@ -60,18 +64,18 @@
             <%= ('★' * review.rating).html_safe %>
             <small class="text-muted"><%= time_ago_in_words(review.created_at) %> ago</small>
           </div>
-          <%= link_to "Delete", review_path(review), method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: "Are you sure?" } %>
+          <%= link_to "Delete", review_path(review), class: "btn btn-outline-danger btn-sm", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
         </div>
         <p><%= review.comment %></p>
       </div>
     <% end %>
   </div>
 
-  <!-- Review Form -->
+  <!-- Add Review Form -->
   <h3>Add Your Review</h3>
   <%= simple_form_for [@list, @list.reviews.new], html: { class: 'mt-4' } do |f| %>
     <%= f.input :comment, as: :text, label: "Your Comment", placeholder: "Write your review...", input_html: { class: "form-control" } %>
-    <%= f.input :rating, as: :number, label: "Rating (1 to 5)", input_html: { min: 1, max: 5, step: 1, class: "form-control" } %>
+    <%= f.input :rating, as: :integer, label: "Rating (1 to 5)", input_html: { min: 1, max: 5, step: 1, class: "form-control" } %>
     <%= f.button :submit, "Add Review", class: "btn btn-primary mt-2" %>
   <% end %>
 </div>

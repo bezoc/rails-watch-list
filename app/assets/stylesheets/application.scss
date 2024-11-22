@@ -12,50 +12,47 @@
 @import "pages/index";
 
 .flash {
-  padding: 16px 24px; /* Espaçamento interno */
-  display: flex; /* Exibe os elementos como uma linha flexível */
-  justify-content: space-between; /* Distribui o texto e o botão de fechar */
-  align-items: center; /* Alinha verticalmente os itens */
-  background: white; /* Fundo branco */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-  border-radius: 4px; /* Bordas arredondadas */
-  margin: 8px; /* Espaçamento entre alertas */
-  font-size: 16px; /* Tamanho da fonte */
-}
-
-.flash-success {
-  border: 2px solid #1EDD88; /* Borda verde para sucesso */
-}
-
-
-.flash-danger {
-  border: 2px solid #FD1015; /* Borda vermelha para erros */
-}
-
-.flash span {
-  display: flex; /* Flexbox interno para alinhar o ícone e o texto */
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px; /* Espaçamento entre o ícone e o texto */
-}
+  background: white;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin: 8px;
+  font-size: 16px;
 
-.flash a {
-  margin-left: 16px;
-  text-decoration: none; /* Remove o sublinhado do link */
-  font-size: 20px; /* Tamanho do ícone de fechar */
-  color: #000; /* Cor preta para o botão */
-  cursor: pointer; /* Troca o cursor para indicar clicável */
-}
+  &-success {
+    border: 2px solid #1EDD88;
+    span {
+      color: #1EDD88;
+    }
+  }
 
-.flash a:hover {
-  color: #555; /* Cor mais escura ao passar o mouse */
-}
+  &-danger {
+    border: 2px solid #FD1015;
+    span {
+      color: #FD1015;
+    }
+  }
 
-.flash-success span {
-  color: #1EDD88; /* Texto verde para sucesso */
-}
+  span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-.flash-danger span {
-  color: #FD1015; /* Texto vermelho para erros */
+  a {
+    margin-left: 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+
+    &:hover {
+      color: #555;
+    }
+  }
 }
 
 .banner {
@@ -66,7 +63,7 @@
   h1 {
     margin: 0;
     color: white;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     font-size: 32px;
     font-weight: bold;
   }
@@ -74,8 +71,8 @@
   p {
     font-size: 20px;
     color: white;
-    opacity: .7;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    opacity: 0.7;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -83,26 +80,48 @@
   border: none;
   border-radius: 8px;
   overflow: hidden;
-}
+  transition: all 0.3s ease-in-out;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-.card-img-top {
-  height: 200px;
-  object-fit: cover;
-}
+  &:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
 
-.card-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
+  .card-img-top {
+    height: 250px; /* Ajusta para ficar mais consistente */
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+  }
 
-.card-text {
-  font-size: 0.9rem;
-  color: #555;
-}
+  .card-body {
+    padding: 16px;
 
-.btn-outline-danger {
-  font-size: 0.8rem;
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        color: #f39c12; /* Cor do rating */
+        font-weight: bold;
+      }
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .btn-outline-danger {
+      font-size: 0.9rem;
+      padding: 5px 10px;
+    }
+  }
 }
 
 .reviews {
@@ -114,6 +133,7 @@
     background: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
+    margin-bottom: 12px;
 
     .btn {
       font-size: 0.8rem;
@@ -127,9 +147,58 @@
 
 form {
   margin-top: 20px;
+
+  textarea, select, input {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+
+    &:focus {
+      border-color: #007BFF;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+  }
 }
 
-textarea, select, input {
-  border-radius: 8px;
-  padding: 10px;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .col-md-4 {
+    flex: 1 1 calc(33.333% - 20px); /* Deixa os cards responsivos com espaço */
+    max-width: calc(33.333% - 20px);
+
+    @media (max-width: 768px) {
+      flex: 1 1 calc(50% - 20px);
+      max-width: calc(50% - 20px);
+    }
+
+    @media (max-width: 576px) {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: #007BFF;
+  border-color: #007BFF;
+
+  &:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+}
+
+.btn-success {
+  background-color: #1EDD88;
+  border-color: #1EDD88;
+
+  &:hover {
+    background-color: #17C876;
+    border-color: #17C876;
+  }
 }
